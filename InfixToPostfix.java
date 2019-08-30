@@ -37,7 +37,7 @@ class Stack
 	
 	public char pop()
 	{
-		char ele=' ';
+		char ele='1';
 		if (isEmpty())
 		{
 			System.out.println("Stack is empty.");
@@ -118,14 +118,18 @@ public class InfixToPostfix
 					{
 						while  (q >= p)
 						{
-							postfix[j] = ch;
+							postfix[j] = st;
 							j++;
+							if (s.isEmpty())
+							{
+								break;
+							}
 							st = s.pop();
 							q = precedenceOf(st);
+						
 						}
+						s.push(ch);
 					}
-					s.push(ch);
-					s.push(st);
 				}
 			}
 			else if (ch == ')')
@@ -133,8 +137,13 @@ public class InfixToPostfix
 				char sc;
 				while ((sc = s.pop()) != '(')
 				{
-					postfix[j] = sc;
-					j++;
+					if (sc != '1')
+					{
+						postfix[j] = sc;
+						j++;
+					}
+					else
+						break;
 				}
 			}
 			else
